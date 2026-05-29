@@ -23,11 +23,6 @@ html {
 
 body {
     background-color: var(--bg-dark);
-    /* Yarı saydamlığı 0.85'ten 0.5'e düşürdük, böylece bg.png daha net görünür */
-    background-image: linear-gradient(rgba(10, 2, 2, 0.5), rgba(10, 2, 2, 0.5)), url('bg.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: var(--text-primary);
     font-family: 'Rajdhani', sans-serif;
     overflow-x: hidden;
@@ -35,6 +30,31 @@ body {
     line-height: 1.6;
     position: relative;
     min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(10, 2, 2, 0.45), rgba(10, 2, 2, 0.45)), url('bg.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+    pointer-events: none;
+    animation: bgFlicker 16s infinite ease-in-out;
+}
+
+@keyframes bgFlicker {
+    0%, 100% { filter: brightness(0.85); }
+    15% { filter: brightness(1.1); }
+    30% { filter: brightness(0.75); }
+    45% { filter: brightness(0.95); }
+    60% { filter: brightness(0.7); }
+    75% { filter: brightness(1.05); }
+    90% { filter: brightness(0.8); }
 }
 
 /* Background Effects */
