@@ -195,6 +195,8 @@ main {
 }
 
 .btn-discord-animated {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,12 +208,30 @@ main {
     text-decoration: none;
     letter-spacing: 0.1em;
     color: white;
-    background: linear-gradient(45deg, #ff0000, #800000, #ff0000, #ff3333);
-    background-size: 300% 300%;
-    animation: gradientShift 4s ease infinite;
     box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #300000;
+    z-index: 1;
+}
+
+.btn-discord-animated::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 35%, #ff3333 0%, transparent 45%),
+        radial-gradient(circle at 75% 65%, #ff0000 0%, transparent 40%),
+        radial-gradient(circle at 80% 25%, #ff6b6b 0%, transparent 35%),
+        radial-gradient(circle at 25% 75%, #ff9f1c 0%, transparent 35%),
+        radial-gradient(circle at 50% 50%, #800000 0%, transparent 50%),
+        #1a0000;
+    filter: blur(15px);
+    z-index: -1;
+    animation: lavaLamp 10s ease-in-out infinite alternate;
 }
 
 .btn-discord-animated:hover {
@@ -219,10 +239,23 @@ main {
     box-shadow: 0 0 40px rgba(255, 0, 0, 0.9);
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.btn-discord-animated:hover::before {
+    animation-duration: 5s; /* Speeds up on hover for interactive feel */
+}
+
+@keyframes lavaLamp {
+    0% {
+        transform: rotate(0deg) scale(1) translate(0, 0);
+    }
+    33% {
+        transform: rotate(90deg) scale(1.15) translate(-5%, 5%);
+    }
+    66% {
+        transform: rotate(180deg) scale(0.9) translate(5%, -5%);
+    }
+    100% {
+        transform: rotate(270deg) scale(1.1) translate(0, 0);
+    }
 }
 
 /* Animations */
